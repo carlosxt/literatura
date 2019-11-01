@@ -1,3 +1,5 @@
+use literatura;
+
 insert into autores(autor_id,nombre,apellido,año_nacimiento,nacionalidad,distinciones) 
 values 
 (1,'Gabriel','Garcia',1927,'Colombiana','Nobel de literatura'),
