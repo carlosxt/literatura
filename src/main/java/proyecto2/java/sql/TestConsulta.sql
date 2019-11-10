@@ -42,12 +42,14 @@ from    libros l
 where   l.genero_libro = 'Poesía';
 
 -- 7.- Consultar el libro cuyo autor haya ganado el premio Orden Francisco De Miranda
-
-select    l.nombre_libro 'Nombre',
+-- y que editorial lo edito. ¡¡¡¡¡¡¡
+select    l.nombre_libro 'Libro',
           concat(a.nombre,' ',a.apellido)'Autor',
-          a.distinciones 'Distinciones'
+          a.distinciones 'Distinciones',
+          e.nombre 'Editorial'
 from      libros l
 join      autores a on (l.autor_id = a.autor_id)       
+join      editoriales e on (l.editorial_id = e.editorial_id)
 where     a.distinciones = 'Orden Francisco De Miranda';
 
 -- 8.- Consultar los libros escritos por Ernest hemingway.
