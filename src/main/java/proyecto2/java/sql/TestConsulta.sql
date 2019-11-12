@@ -1,4 +1,4 @@
-use literatura;
+-- use literatura;
 
 -- 1.- Consultar el contenido de las tablas existentes.
 
