@@ -29,7 +29,7 @@ public class Libros {
     public String toString() {
         return "Libros{" + "libro_id=" + libro_id + ", nombre_libro=" + nombre_libro + ", genero_libro=" + genero_libro + ", editorial_id=" + editorial_id + ", autor_id=" + autor_id + '}';
     }
-
+    
     public int getLibro_id() {
         return libro_id;
     }
