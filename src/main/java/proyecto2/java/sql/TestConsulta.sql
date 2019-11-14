@@ -77,3 +77,6 @@ select      count(a.autor_id) 'Cantidad de autores'
 from        autores a
 join        libros l on (a.autor_id = l.libro_id)
 where       l.genero_libro = 'Novela'; 
+
+
+update autores where id=? set autor_id=?, nombre=?, apellido=?, año_nacimiento=?
