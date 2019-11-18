@@ -1,4 +1,4 @@
-package proyecto2.java.repository;
+package proyecto2.java.repositories;
 public class EditorialesRepository {
     
 }

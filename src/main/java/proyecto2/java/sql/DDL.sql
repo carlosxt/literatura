@@ -1,8 +1,12 @@
-drop database if exists literatura;
-create database literatura;
+-- drop database if exists literatura;
+-- create database literatura;
+drop database if exists 6czVBNFZOp;
+create database 6czVBNFZOp;
 show databases;
+show tables;
 
-use literatura;
+-- use literatura;
+use 6czVBNFZOp;
 
 create table editoriales(
 editorial_id      int not null primary key,

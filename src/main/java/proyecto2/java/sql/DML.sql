@@ -1,4 +1,5 @@
-use literatura;
+-- use literatura;
+-- use 6czVBNFZOp;
 
 insert into autores(autor_id,nombre,apellido,año_nacimiento,nacionalidad,distinciones) 
 values 

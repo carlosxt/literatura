@@ -1,8 +1,9 @@
-package proyecto2.java.repository;
+package proyecto2.java.repositories;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import proyecto2.java.entities.Autores;
 import proyecto2.java.interfaces.I_AutoresRepository;
@@ -23,7 +24,7 @@ private Connection conn;
             ps.setInt(4, autores.getAño_nacimiento());
             ps.setString(5, autores.getNacionalidad());
             ps.setString(6, autores.getDistinciones());
-            ps.execute();
+//            ps.execute();
             ResultSet rs=ps.getGeneratedKeys();
             if(rs.next()) autores.setAutor_id(rs.getInt(1));
         } catch (Exception e) { e.printStackTrace(); }
@@ -58,7 +59,21 @@ private Connection conn;
 
     @Override
     public List<Autores> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+List<Autores>list=new ArrayList();
+        try (ResultSet rs=conn.createStatement().executeQuery(
+                "select * from autores")) {
+            while(rs.next()){
+                list.add(new Autores(
+//                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("apellido"),
+                        rs.getInt("año_nacimiento"),
+                        rs.getString("nacionalidad"),
+                        rs.getString("distinciones")
+                ));
+            }
+        } catch (Exception e) { e.printStackTrace();  }
+        return list;
+      }
     
 }
