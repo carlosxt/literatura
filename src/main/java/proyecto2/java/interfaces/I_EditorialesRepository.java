@@ -10,7 +10,14 @@ public interface I_EditorialesRepository {
       void remove  (Editoriales editoriales);    // delete editoriales
       void update  (Editoriales editoriales);    // update editoriales
       List<Editoriales>getAll();                 // select * from editoriales
-      
+    
+      default Editoriales getById(int id){
+        return getAll()
+                .stream()
+                .filter(a->a.getEditorial_id()==id)
+                .findFirst()
+                .orElse(new Editoriales());
+    }
    default List<Editoriales> getLikeNombre(String nombre){
         if(nombre==null) return new ArrayList<Editoriales>();
         return getAll()

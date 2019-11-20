@@ -11,9 +11,9 @@ public class Connector {
 //    private static String user="root";
 //    private static String pass="tripode18";
     // useTimezone=true&serverTimezone=UTC  
-    private static String url="jdbc:mysql://remotemysql.com:3306/6czVBNFZOp";
-    private static String user="6czVBNFZOp";
-    private static String pass="CTcEutDIsY";
+    private static String url="jdbc:mysql://remotemysql.com:3306/AqeuJt3sJ4";
+    private static String user="AqeuJt3sJ4";
+    private static String pass="JZ1HrOKkd9";
    
     private static Connection conn=null;
     private Connector(){}

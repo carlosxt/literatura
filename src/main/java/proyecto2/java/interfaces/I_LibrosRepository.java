@@ -12,6 +12,14 @@ public interface I_LibrosRepository {
     void remove   (Libros libros);  // delete libros
     void update   (Libros libros);  // update libros
     List<Libros>getAll();           // select * from libros
+   
+    default Libros getById(int id){
+        return getAll()
+                .stream()
+                .filter(a->a.getLibro_id()==id)
+                .findFirst()
+                .orElse(new Libros());
+    }
     
     default List<Libros> getLikeNombre_libro(String nombre_libro){
         if(nombre_libro==null) return new ArrayList<Libros>();

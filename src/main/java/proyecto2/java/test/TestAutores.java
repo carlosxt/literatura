@@ -22,7 +22,7 @@ public class TestAutores {
             ar.update(autores);
             
             ar.getAll().forEach(System.out::println);
-            //cr.getLikeProfesor("go").forEach(System.out::println);
+            
             
            
             

@@ -1,5 +1,3 @@
--- use literatura;
-use 6czVBNFZOp;
 
 -- 1.- Consultar el contenido de las tablas existentes.
 
@@ -80,4 +78,4 @@ join        libros l on (a.autor_id = l.libro_id)
 where       l.genero_libro = 'Novela'; 
 
 
-update autores where id=? set autor_id=?, nombre=?, apellido=?, año_nacimiento=?
+

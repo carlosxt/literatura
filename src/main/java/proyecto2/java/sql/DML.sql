@@ -1,5 +1,18 @@
--- use literatura;
--- use 6czVBNFZOp;
+
+insert into editoriales(editorial_id,nombre)
+values
+(1,'Sudamericana'),
+(2,'Seix Barral'),
+(3,'Raica'),
+(4,'Longseller'),
+(5,'Planeta'),
+(6,'El Ateneo'),
+(7,'Alfaguara'),
+(8,'Booket'),
+(9,'Debolsillo'),
+(10,'Sur'),
+(11,'Anagrama'),
+(12,'Emecé');
 
 insert into autores(autor_id,nombre,apellido,año_nacimiento,nacionalidad,distinciones) 
 values 
@@ -18,20 +31,6 @@ values
 (13,'Gabriela','Mistral',1889,'Chilena','Nobel de literatura'),
 (14,'Julio','Cortázar',1914,'Argentina','Premio Médicis Etranger');
 
-insert into editoriales(editorial_id,nombre)
-values
-(1,'Sudamericana'),
-(2,'Seix Barral'),
-(3,'Raica'),
-(4,'Longseller'),
-(5,'Planeta'),
-(6,'El Ateneo'),
-(7,'Alfaguara'),
-(8,'Booket'),
-(9,'Debolsillo'),
-(10,'Sur'),
-(11,'Anagrama'),
-(12,'Emecé');
 
 insert into libros(libro_id,nombre_libro,genero_libro,editorial_id,autor_id)
 values
