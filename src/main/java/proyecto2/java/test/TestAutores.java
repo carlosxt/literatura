@@ -10,11 +10,11 @@ public class TestAutores {
     public static void main(String[] args) {
         try(Connection conn=Connector.getConnection()) {
             I_AutoresRepository ar = new AutoresRepository(conn);
-            Autores autores=new Autores(45,"Ciro","Alegría",1909,"Peruana","Sin distinciones");
+            Autores autores=new Autores("Ciro","Alegría",1909,"Peruana","Sin distinciones");
             ar.save(autores);
             System.out.println(autores);
             
-            ar.remove(ar.getById(4));
+            ar.remove(ar.getById(25));
             
             autores = ar.getById(6);
             autores.setNombre("Mario");
@@ -23,10 +23,7 @@ public class TestAutores {
             
             ar.getAll().forEach(System.out::println);
             
-            
            
-            
-            ar.getAll().forEach(System.out::println);
         } catch (Exception e) { e.printStackTrace();}
     }
 }

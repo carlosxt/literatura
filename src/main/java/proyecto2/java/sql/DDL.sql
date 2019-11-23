@@ -1,12 +1,14 @@
-
+drop database if exists AqeuJt3sJ4;
+create database AqeuJt3sJ4;
+use AqeuJt3sJ4;
 create table editoriales(
-editorial_id      int not null primary key,
+editorial_id      int auto_increment primary key,
 nombre            varchar(40)
 
 );
 
 create table autores(
-autor_id         int not null primary key,
+autor_id         int auto_increment primary key,
 nombre           varchar(45),
 apellido         varchar(45),
 año_nacimiento   int(4) null,

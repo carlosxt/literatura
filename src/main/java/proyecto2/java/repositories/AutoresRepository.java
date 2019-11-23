@@ -15,16 +15,16 @@ private Connection conn;
     public void save(Autores autores) {
     if(autores==null) return;
         try (PreparedStatement ps=conn.prepareStatement(
-            "insert into autores (autor_id,nombre,apellido,año_nacimiento,nacionalidad,distinciones) values (?,?,?,?,?,?)",
+            "insert into autores (nombre,apellido,año_nacimiento,nacionalidad,distinciones) values (?,?,?,?,?)",
             PreparedStatement.RETURN_GENERATED_KEYS
         )) {
-            ps.setInt(1, autores.getAutor_id());
-            ps.setString(2, autores.getNombre());
-            ps.setString(3, autores.getApellido());
-            ps.setInt(4, autores.getAño_nacimiento());
-            ps.setString(5, autores.getNacionalidad());
-            ps.setString(6, autores.getDistinciones());
-//            ps.execute();
+            
+            ps.setString(1, autores.getNombre());
+            ps.setString(2, autores.getApellido());
+            ps.setInt(3, autores.getAño_nacimiento());
+            ps.setString(4, autores.getNacionalidad());
+            ps.setString(5, autores.getDistinciones());
+            ps.execute();
             ResultSet rs=ps.getGeneratedKeys();
             if(rs.next()) autores.setAutor_id(rs.getInt(1));
         } catch (Exception e) { e.printStackTrace(); }
@@ -64,7 +64,7 @@ List<Autores>list=new ArrayList();
                 "select * from autores")) {
             while(rs.next()){
                 list.add(new Autores(
-//                        rs.getInt("id"),
+                        rs.getInt("autor_id"),
                         rs.getString("nombre"),
                         rs.getString("apellido"),
                         rs.getInt("año_nacimiento"),

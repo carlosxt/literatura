@@ -10,11 +10,11 @@ public class TestEditoriales {
     public static void main(String[] args) {
         try(Connection conn=Connector.getConnection()) {
             I_EditorialesRepository er = new EditorialesRepository(conn);
-            Editoriales editoriales=new Editoriales(25,"Caralt");
+            Editoriales editoriales=new Editoriales("Caralt");
             er.save(editoriales);
             System.out.println(editoriales);
             
-            er.remove(er.getById(4));
+            er.remove(er.getById(35));
             
             editoriales = er.getById(6);
             editoriales.setNombre("Booket");

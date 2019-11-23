@@ -22,13 +22,13 @@ public class EditorialesRepository implements I_EditorialesRepository {
             return;
         }
         try ( PreparedStatement ps = conn.prepareStatement(
-                "insert into editoriales (editorial_id, nombre) values (?,?)",
+                "insert into editoriales (nombre) values (?)",
                 PreparedStatement.RETURN_GENERATED_KEYS
         )) {
-            ps.setInt(1, editoriales.getEditorial_id());
-            ps.setString(2, editoriales.getNombre());
+          
+            ps.setString(1, editoriales.getNombre());
 
-//            ps.execute();
+            ps.execute();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 editoriales.setEditorial_id(0);
@@ -76,7 +76,7 @@ public class EditorialesRepository implements I_EditorialesRepository {
                 "select * from editoriales")) {
             while(rs.next()){
                 list.add(new Editoriales(
-        //       rs.getInt("id"),
+                        rs.getInt("editorial_id"),
                         rs.getString("nombre")
                         
                 ));
