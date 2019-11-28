@@ -1,7 +1,37 @@
 package proyecto2.java.gui;
-public class Libros extends javax.swing.JFrame {
-    public Libros() {
+
+
+import ar.org.centro8.curso.java.utils.swing.Table;
+import proyecto2.java.connector.Connector;
+import proyecto2.java.entities.Libros;
+import proyecto2.java.interfaces.I_AutoresRepository;
+import proyecto2.java.interfaces.I_EditorialesRepository;
+import proyecto2.java.interfaces.I_LibrosRepository;
+import proyecto2.java.repositories.AutoresRepository;
+import proyecto2.java.repositories.EditorialesRepository;
+import proyecto2.java.repositories.LibrosRepository;
+
+public class FormLibros extends javax.swing.JInternalFrame {
+    private I_AutoresRepository ar;
+    private I_EditorialesRepository er;
+    private I_LibrosRepository lr;
+    public FormLibros() {
+//        super(
+//                "Formulario de libros",    //titulo
+//                false,                      //resizable
+//                true,                       //closable
+//                false,                      //maximizable
+//                true                        //iconable
+//        );
         initComponents();
+        ar=new AutoresRepository(Connector.getConnection());
+        er=new EditorialesRepository(Connector.getConnection());
+        lr=new LibrosRepository(Connector.getConnection());
+        cargar();
+    }
+    public void cargar(){
+        
+        new Table<Libros>().cargar(tblLibros, lr.getAll());
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -21,7 +51,7 @@ public class Libros extends javax.swing.JFrame {
         txtBuscar = new javax.swing.JTextField();
         btnActualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblAlumnos = new javax.swing.JTable();
+        tblLibros = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         btnAgregar = new javax.swing.JButton();
 
@@ -69,8 +99,13 @@ public class Libros extends javax.swing.JFrame {
 
         btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
-        tblAlumnos.setModel(new javax.swing.table.DefaultTableModel(
+        tblLibros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -81,10 +116,15 @@ public class Libros extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tblAlumnos);
+        jScrollPane1.setViewportView(tblLibros);
 
         btnAgregar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnAgregar.setText("Agregar libro");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,6 +206,14 @@ public class Libros extends javax.swing.JFrame {
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBuscarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnActualizarActionPerformed
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -180,7 +228,7 @@ public class Libros extends javax.swing.JFrame {
     private javax.swing.JLabel lblEditorial;
     private javax.swing.JLabel lblGenero;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JTable tblAlumnos;
+    private javax.swing.JTable tblLibros;
     private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtEditorial;
