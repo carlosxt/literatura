@@ -1,5 +1,13 @@
 package proyecto2.java.entities;
+
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 public class Editoriales {
+    static Statement sentencia;
+    static ResultSet resultado;
+   
     private int   editorial_id;
     private String nombre;
     
@@ -37,4 +45,6 @@ public class Editoriales {
         this.editorial_id = editorial_id;
     }
     
+    
+   
 }

@@ -92,21 +92,21 @@ public class Literatura extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mniAutoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniAutoresActionPerformed
-        // Evento autores
-        Autores autores=new Autores();
+        // Evento FormAutores
+        FormAutores autores=new FormAutores();
         desktop.add(autores);
         autores.setVisible(true);
     }//GEN-LAST:event_mniAutoresActionPerformed
 
     private void mniEditorialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniEditorialesActionPerformed
-        // Evento Editoriales
-        Editoriales editoriales=new Editoriales();
+        // Evento FormEditoriales
+        FormEditoriales editoriales=new FormEditoriales();
         desktop.add(editoriales);
         editoriales.setVisible(true);
     }//GEN-LAST:event_mniEditorialesActionPerformed
 
     private void mniLibrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLibrosActionPerformed
-        // Evento Libros
+        // Evento FormLibros
         FormLibros libros=new FormLibros();
         desktop.add(libros);
         libros.setVisible(true);

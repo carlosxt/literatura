@@ -1,5 +1,7 @@
 package proyecto2.java.entities;
 public class Autores {
+
+    
                
      private int      autor_id;         
      private String   nombre;           

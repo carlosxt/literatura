@@ -2,7 +2,11 @@ package proyecto2.java.gui;
 
 
 import ar.org.centro8.curso.java.utils.swing.Table;
+import ar.org.centro8.curso.java.utils.swing.Validator;
+import javax.swing.JOptionPane;
 import proyecto2.java.connector.Connector;
+import proyecto2.java.entities.Autores;
+import proyecto2.java.entities.Editoriales;
 import proyecto2.java.entities.Libros;
 import proyecto2.java.interfaces.I_AutoresRepository;
 import proyecto2.java.interfaces.I_EditorialesRepository;
@@ -16,14 +20,15 @@ public class FormLibros extends javax.swing.JInternalFrame {
     private I_EditorialesRepository er;
     private I_LibrosRepository lr;
     public FormLibros() {
-//        super(
-//                "Formulario de libros",    //titulo
-//                false,                      //resizable
-//                true,                       //closable
-//                false,                      //maximizable
-//                true                        //iconable
-//        );
+        super(
+                "Formulario de libros",    //titulo
+                false,                      //resizable
+                true,                       //closable
+                false,                      //maximizable
+                true                        //iconable
+        );
         initComponents();
+        
         ar=new AutoresRepository(Connector.getConnection());
         er=new EditorialesRepository(Connector.getConnection());
         lr=new LibrosRepository(Connector.getConnection());
@@ -31,6 +36,15 @@ public class FormLibros extends javax.swing.JInternalFrame {
     }
     public void cargar(){
         
+        //cargar cmbEditorial
+        cmbEditorial.removeAllItems();
+        er.getAll().forEach(cmbEditorial::addItem);
+        
+        //cargar cmbAutor
+        cmbAutor.removeAllItems();
+        ar.getAll().forEach(cmbAutor::addItem);
+     
+        //Cargar tbl Libros
         new Table<Libros>().cargar(tblLibros, lr.getAll());
     }
     @SuppressWarnings("unchecked")
@@ -45,15 +59,15 @@ public class FormLibros extends javax.swing.JInternalFrame {
         lblAutor = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtGenero = new javax.swing.JTextField();
-        txtEditorial = new javax.swing.JTextField();
-        txtAutor = new javax.swing.JTextField();
         lblBuscar = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
-        btnActualizar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblLibros = new javax.swing.JTable();
         jSeparator1 = new javax.swing.JSeparator();
         btnAgregar = new javax.swing.JButton();
+        cmbEditorial = new javax.swing.JComboBox<>();
+        cmbAutor = new javax.swing.JComboBox<>();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -68,7 +82,7 @@ public class FormLibros extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(jTable1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblNombre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblNombre.setText("Nombre:");
@@ -97,11 +111,11 @@ public class FormLibros extends javax.swing.JInternalFrame {
             }
         });
 
-        btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnActualizar.setText("Actualizar");
-        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActualizarActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -139,9 +153,9 @@ public class FormLibros extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(lblGenero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -149,15 +163,14 @@ public class FormLibros extends javax.swing.JInternalFrame {
                                 .addComponent(lblEditorial, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                                 .addComponent(lblAutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtGenero)
-                                    .addComponent(txtEditorial, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
-                                    .addComponent(txtAutor)
-                                    .addComponent(txtNombre))
-                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtGenero, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
+                                .addComponent(txtNombre)
+                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cmbEditorial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cmbAutor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGap(1, 1, 1))))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,15 +186,15 @@ public class FormLibros extends javax.swing.JInternalFrame {
                         .addGap(1, 1, 1)
                         .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEditorial, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(txtEditorial, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cmbEditorial, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cmbAutor)
+                        .addGap(8, 8, 8)))
                 .addGap(17, 17, 17)
                 .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
@@ -190,10 +203,10 @@ public class FormLibros extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -204,21 +217,52 @@ public class FormLibros extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBuscarActionPerformed
+         String buscar=txtBuscar.getText();
+        if(buscar==null) buscar="";
+        new Table<Libros>().cargar(tblLibros, lr.getLikeNombre_libro(buscar));    }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarActionPerformed
+         if(!validar()) return;
+                
+                Libros libros=new Libros(
+                txtNombre.getText(), 
+                txtGenero.getText(), 
+                this.cmbEditorial.getItemAt(cmbEditorial.getSelectedIndex()).getEditorial_id(),
+                cmbAutor.getItemAt(cmbAutor.getSelectedIndex()).getAutor_id()
+                
+        );
+        lr.save(libros);
+        JOptionPane.showMessageDialog(this, 
+                "Se dio de alta un Libro id: "+libros.getLibro_id());
+        limpiar();
+        cargar();    }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnActualizarActionPerformed
-   
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+       //Evento eliminar
+        int index=tblLibros.getSelectedRow();
+        if(index==-1) return;
+        Libros libros=lr.getById(
+                Integer.parseInt(tblLibros.getValueAt(index, 0)+""));
+        
+        if(JOptionPane.showConfirmDialog(this, 
+            "Confirmar eliminación de Libro "+libros.getLibro_id()+" "+libros.getNombre_libro()+" "
+                    +libros.getGenero_libro()+" "+libros.getEditorial_id()+" "
+                    +libros.getAutor_id()+"?")!=0) 
+            return;
+        lr.remove(libros);
+        cargar();    }//GEN-LAST:event_btnEliminarActionPerformed
+  
+        public void limpiar(){
+        txtNombre.setText("");
+        txtGenero.setText("");
+        txtNombre.requestFocus();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JComboBox<Autores> cmbAutor;
+    private javax.swing.JComboBox<Editoriales> cmbEditorial;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
@@ -229,10 +273,16 @@ public class FormLibros extends javax.swing.JInternalFrame {
     private javax.swing.JLabel lblGenero;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JTable tblLibros;
-    private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtBuscar;
-    private javax.swing.JTextField txtEditorial;
     private javax.swing.JTextField txtGenero;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+    private boolean validar() {
+      if(!new Validator(txtNombre).length(1, 30)) return false;
+      
+      if(!new Validator(txtGenero).length(1,30))  return false;
+    
+      return true;
+    }
 }
