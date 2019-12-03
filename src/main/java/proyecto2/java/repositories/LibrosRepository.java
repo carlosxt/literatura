@@ -32,7 +32,7 @@ private Connection conn;
             ps.execute();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                libros.setLibro_id(0);
+                libros.setLibro_id(rs.getInt(1));
             }
         } catch (Exception e) {
             e.printStackTrace();

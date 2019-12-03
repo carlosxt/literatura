@@ -31,7 +31,7 @@ public class EditorialesRepository implements I_EditorialesRepository {
             ps.execute();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                editoriales.setEditorial_id(0);
+                editoriales.setEditorial_id(rs.getInt(1));
             }
         } catch (Exception e) {
             e.printStackTrace();
