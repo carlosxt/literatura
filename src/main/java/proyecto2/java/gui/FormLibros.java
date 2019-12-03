@@ -140,6 +140,8 @@ public class FormLibros extends javax.swing.JInternalFrame {
             }
         });
 
+        cmbEditorial.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

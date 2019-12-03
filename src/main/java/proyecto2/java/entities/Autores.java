@@ -33,7 +33,7 @@ public class Autores {
 
     @Override
     public String toString() {
-        return "Autores{" + "autor_id=" + autor_id + ", nombre=" + nombre + ", apellido=" + apellido + ", año_nacimiento=" + año_nacimiento + ", nacionalidad=" + nacionalidad + ", distinciones=" + distinciones + '}';
+        return ""+ nombre + " " + apellido;
     }
 
     public int getAutor_id() {
